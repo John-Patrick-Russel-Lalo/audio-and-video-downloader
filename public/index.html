@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Downloader</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#050505;
+      overflow:hidden;
+      color:white;
+      position:relative;
+    }
+
+    /* Background Glow */
+    body::before,
+    body::after{
+      content:"";
+      position:absolute;
+      width:400px;
+      height:400px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.08);
+      filter:blur(120px);
+      z-index:0;
+    }
+
+    body::before{
+      top:-120px;
+      left:-120px;
+    }
+
+    body::after{
+      bottom:-120px;
+      right:-120px;
+    }
+
+    .container{
+      position:relative;
+      z-index:1;
+      width:90%;
+      max-width:420px;
+      padding:40px;
+      border-radius:28px;
+
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.15);
+
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+
+      box-shadow:
+        0 8px 32px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .logo{
+      width:70px;
+      height:70px;
+      margin:auto;
+      margin-bottom:20px;
+
+      border-radius:20px;
+      background:rgba(255,255,255,0.08);
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      font-size:28px;
+
+      border:1px solid rgba(255,255,255,0.1);
+
+      backdrop-filter:blur(10px);
+    }
+
+    h1{
+      text-align:center;
+      font-size:32px;
+      font-weight:600;
+      margin-bottom:10px;
+      letter-spacing:-1px;
+    }
+
+    .subtitle{
+      text-align:center;
+      color:rgba(255,255,255,0.6);
+      font-size:14px;
+      margin-bottom:35px;
+    }
+
+    .input-group{
+      margin-bottom:18px;
+    }
+
+    input,
+    select{
+      width:100%;
+      padding:16px 18px;
+
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.12);
+
+      border-radius:16px;
+      outline:none;
+
+      color:white;
+      font-size:15px;
+
+      transition:0.3s ease;
+    }
+
+    input::placeholder{
+      color:rgba(255,255,255,0.45);
+    }
+
+    input:focus,
+    select:focus{
+      border-color:rgba(255,255,255,0.4);
+      background:rgba(255,255,255,0.08);
+      color:black;
+    }
+
+    select{
+      appearance:none;
+      cursor:pointer;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    button{
+      width:100%;
+      padding:16px;
+      margin-top:10px;
+
+      border:none;
+      border-radius:18px;
+
+      background:white;
+      color:black;
+
+      font-size:15px;
+      font-weight:600;
+
+      cursor:pointer;
+      transition:0.3s ease;
+    }
+
+    button:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 25px rgba(255,255,255,0.18);
+    }
+
+    #status{
+      margin-top:20px;
+      text-align:center;
+      font-size:14px;
+      color:rgba(255,255,255,0.65);
+    }
+
+    .glass-line{
+      position:absolute;
+      inset:0;
+      border-radius:28px;
+      padding:1px;
+      background:linear-gradient(
+        135deg,
+        rgba(255,255,255,0.25),
+        rgba(255,255,255,0.02)
+      );
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;
+      pointer-events:none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="glass-line"></div>
+
+    <div class="logo">
+      ↓
+    </div>
+
+    <h1>Downloader</h1>
+
+    <p class="subtitle">
+      Minimal video & audio downloader
+    </p>
+
+    <div class="input-group">
+      <input
+        type="text"
+        id="url"
+        placeholder="Paste URL here"
+      >
+    </div>
+
+    <div class="input-group">
+      <select id="type">
+        <option value="video">Video</option>
+        <option value="audio">Audio MP3</option>
+      </select>
+    </div>
+
+    <button onclick="downloadMedia()">
+      Download
+    </button>
+
+    <p id="status"></p>
+
+  </div>
+
+</body>
+</html>
